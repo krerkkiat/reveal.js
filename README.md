@@ -44,6 +44,12 @@ Hakim's open source work is supported by <a href="https://github.com/sponsors/ha
 - 🖌 [Try the visual editor for reveal.js at Slides.com](https://slides.com/)
 - 🎬 [Watch the reveal.js video course (paid)](https://revealjs.com/course)
 
+### The OU EECS theme
+
+#### Font
+
+If you want to have same font as the tempalte, follow the instructions at https://www.ohio.edu/ucm/ohio-brand/typography.
+
 --- 
 <div align="center">
   MIT licensed | Copyright © 2011-2024 Hakim El Hattab, https://hakim.se
