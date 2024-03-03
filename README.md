@@ -7,39 +7,46 @@
   <a href="https://slides.com/"><img src="https://s3.amazonaws.com/static.slid.es/images/slides-github-banner-320x40.png?1" alt="Slides" width="160" height="20"></a>
 </p>
 
-## The OU EECS theme
+## The OU EECS Theme
 
-An attempt to replicate the OU's themed presentation in reveal.js. 
+An attempt to replicate the [OU's branded template](https://www.ohio.edu/business/resources/faculty-staff/branded-templates) in reveal.js. So far the logo on the top left and the college or department name on
+the bottom left are implemented.
 
-Write your content using the markup (HTML, CSS) or Markdown. Then to view the presentation, run
+Why reveal.js? So far it seems to be the most mature and still being maintained. With reveal.js you can
+also
+
+- Write your content using Markdown or HTML/CSS.
+- Have code with syntax highlighting for free.
+
+### Viewing the Slides
 
 ```console
 npm run start
-```
-
-### Re-build the theme
-
-```console
-npm run build -- css-themes
 ```
 
 ### Features
 
 **Light Background**
 
-Add
+In Markdown, add
 
 ```markdown
 <!-- .slide: data-ou-bg-type="light" -->
 ```
 
+For HTML, just add that `data-ou-bg-type="light"` to the `<section>` tag.
+
 **Font**
 
 If you want to have same font as the tempalte, follow the instructions at https://www.ohio.edu/ucm/ohio-brand/typography.
 
-### Modifying the Theme?
+### Want to Modify the Theme?
 
-The source file is at `css/theme/source/ou.scss`.
+The source file is at `css/theme/source/ou.scss`. You can then re-build the theme with
+
+```console
+npm run build -- css-themes
+```
 
 ## About reveal.js
 
