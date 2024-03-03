@@ -8,16 +8,54 @@
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="dist/theme/ou.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<!-- See https://github.com/hakimel/reveal.js/issues/806 -->
+		<style type="text/css">
+			/* 1. Style header/footer <div> so they are positioned as desired. */
+			.ou-header-left {
+				position: absolute;
+				top: 0%;
+				left: 10px;
+				z-index: 1;
+			}
+
+			.ou-header-left img {
+				width: 130px;
+				height: 50px;
+			}
+
+			.ou-header-right {
+				position: absolute;
+				top: 0%;
+				right: 0%;
+			}
+
+			.ou-footer-left {
+				position: absolute;
+				bottom: 0%;
+				left: 0%;
+				font-size: 0.75em;
+				z-index: 1;
+			}
+		</style>
 	</head>
 	<body>
+		<!-- 2. Create hidden header/footer <div> -->
+		<div id="hidden" style="display:none;">
+			<div id="header">
+				<div class="ou-header-left"><img src="img/OHIO_primary_logo_RGB_White.png"></img></div>
+				<div class="ou-header-right"></div>
+				<div class="ou-footer-left">Russ College of Engineering<br/>School of EECS</div>
+			</div>
+		</div>
+
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section data-markdown="content.md" data-separator="^\r?\n---\r?\n$" data-separator-vertical="^\r?\n----\r?\n$"></section>
 			</div>
 		</div>
 
@@ -34,7 +72,44 @@
 
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			}).then(() => {
+				// Parse data-ou-bg-type on the slide.
+				var slides = Reveal.getSlides();
+				for (var i = 0; i < slides.length; i++) {
+					var slide = slides[i];
+					if ($(slide).data("ou-bg-type") === "light") {
+						$(slide).addClass("ou-light");
+						var slideBackgroundElement = slide.slideBackgroundElement;
+						$(slideBackgroundElement).addClass("ou-light");
+						slideBackgroundElement.style.backgroundColor = "#F9F7ED";
+					}
+				}
 			});
+		</script>
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+		<script type="text/javascript">
+			// 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
+			var header = $('#header').html();
+			if ( window.location.search.match( /print-pdf/gi ) ) {
+				Reveal.addEventListener( 'ready', function( event ) {
+					$('.slide-background').append(header);
+				});
+			}
+			else {
+				$('div.reveal').append(header);
+
+				// Register event handler.
+				Reveal.on( 'slidechanged', event => {
+					// event.previousSlide, event.currentSlide, event.indexh, event.indexv
+					if ($(event.currentSlide).data("ou-bg-type") === "light") {
+						$(".ou-footer-left").addClass("ou-light");
+						$(".ou-header-left img").attr("src", "img/OHIO_primary_logo_RGB_Cutler.png");
+					} else {
+						$(".ou-footer-left").removeClass("ou-light");
+						$(".ou-header-left img").attr("src", "img/OHIO_primary_logo_RGB_White.png");
+					}
+				});
+		   }
 		</script>
 	</body>
 </html>

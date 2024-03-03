@@ -44,3 +44,37 @@ $heading4Size: 1.0em;
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
+
+// Theme but with light background -------------
+$lightBackgroundColor: #F9F7ED;
+$lightHeadingColor: #024230; 
+$lightMainColor: #024230;
+
+.ou-light {
+	color: $lightMainColor !important;
+}
+
+.ou-light h1,
+.ou-light h2,
+.ou-light h3,
+.ou-light h4,
+.ou-light h5,
+.ou-light h6 {
+	color: $lightHeadingColor !important;
+}
+
+// Header and footer ---------------------------
+
+// When ?print-pdf.
+.slide-background.ou-light .ou-header-left img {
+    content: url("../../img/OHIO_primary_logo_RGB_Cutler.png");
+}
+
+.slide-background.ou-light .ou-footer-left {
+    color: $lightMainColor !important;
+}
+
+// Normal viewing.
+// .ou-footer-left.ou-light {
+//     color: $lightMainColor !important;
+// }
