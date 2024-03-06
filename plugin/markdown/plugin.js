@@ -477,7 +477,7 @@ const Plugin = () => {
 			
 			let citationMappings = {};
 			try {
-				const urlParts = [location.protocol, location.host, location.pathname];
+				const urlParts = [location.protocol, "//", location.host, location.pathname];
 				const response = await fetch(urlParts.join("") + "ref.json");
 				const data = await response.json();
 				for (var i = 0; i < data.length; i++) {
