@@ -320,76 +320,88 @@
 			import Highlight from '../plugin/highlight/highlight.esm.js'
 
 			QUnit.config.testTimeout = 30000;
+			QUnit.config.autostart = false;
+
+			let allTestsReady = [];
 
 			let deck1 = new Reveal( document.querySelector( '.deck1' ), { plugins: [ Markdown ] })
-			deck1.addEventListener( 'ready', function() {
+			allTestsReady.push( new Promise( (resolve, reject) => {
+				deck1.addEventListener( 'ready', function() {
 
-				QUnit.module( 'Inline' );
+					QUnit.module( 'Inline' );
 
-				QUnit.test( 'Vertical separator', function( assert ) {
-					assert.strictEqual( deck1.getRevealElement().querySelectorAll( '.reveal .slides>section>section' ).length, 2, 'found two slides' );
-				});
+					QUnit.test( 'Vertical separator', function( assert ) {
+						assert.strictEqual( deck1.getRevealElement().querySelectorAll( '.reveal .slides>section>section' ).length, 2, 'found two slides' );
+					});
 
-				QUnit.test( 'Horizontal separator', function( assert ) {
-					assert.strictEqual( deck1.getRevealElement().querySelectorAll( '.reveal .slides>section' ).length, 2, 'found two slides' );
-				});
+					QUnit.test( 'Horizontal separator', function( assert ) {
+						assert.strictEqual( deck1.getRevealElement().querySelectorAll( '.reveal .slides>section' ).length, 2, 'found two slides' );
+					});
 
-			} );
+					resolve();
+				} );
+			} ));
 
 			let deck2 = new Reveal( document.querySelector( '.deck2' ), { plugins: [ Markdown ] })
-			deck2.addEventListener( 'ready', function() {
+			allTestsReady.push( new Promise( (resolve, reject) => {
+				deck2.addEventListener( 'ready', function() {
 
-				QUnit.module( 'External' );
+					QUnit.module( 'External' );
 
-				QUnit.test( 'Vertical separator', function( assert ) {
-					assert.strictEqual( deck2.getRevealElement().querySelectorAll( '.reveal .slides>section>section' ).length, 2, 'found two slides' );
-				});
+					QUnit.test( 'Vertical separator', function( assert ) {
+						assert.strictEqual( deck2.getRevealElement().querySelectorAll( '.reveal .slides>section>section' ).length, 2, 'found two slides' );
+					});
 
-				QUnit.test( 'Horizontal separator', function( assert ) {
-					assert.strictEqual( deck2.getRevealElement().querySelectorAll( '.reveal .slides>section' ).length, 2, 'found two slides' );
-				});
-
-			} );
+					QUnit.test( 'Horizontal separator', function( assert ) {
+						assert.strictEqual( deck2.getRevealElement().querySelectorAll( '.reveal .slides>section' ).length, 2, 'found two slides' );
+					});
+					
+					resolve();
+				} );
+			} ));
 
 			let deck3 = new Reveal( document.querySelector( '.deck3' ), { plugins: [ Markdown ] })
-			deck3.addEventListener( 'ready', function() {
+			allTestsReady.push( new Promise( (resolve, reject) => {
+				deck3.addEventListener( 'ready', function() {
 
-				QUnit.module( 'Slide Attributes' );
+					QUnit.module( 'Slide Attributes' );
 
-				QUnit.test( 'Id on slide', function( assert ) {
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section#slide2' ).length, 1, 'found one slide with id slide2' );
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section a[href="#/slide2"]' ).length, 1, 'found one slide with a link to slide2' );
-				});
+					QUnit.test( 'Id on slide', function( assert ) {
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section#slide2' ).length, 1, 'found one slide with id slide2' );
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section a[href="#/slide2"]' ).length, 1, 'found one slide with a link to slide2' );
+					});
 
-				QUnit.test( 'data-background attributes', function( assert ) {
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-background="#A0C66B"]' ).length, 1, 'found one vertical slide with data-background="#A0C66B"' );
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-background="#ff0000"]' ).length, 1, 'found one vertical slide with data-background="#ff0000"' );
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section[data-background="#C6916B"]' ).length, 1, 'found one slide with data-background="#C6916B"' );
-				});
+					QUnit.test( 'data-background attributes', function( assert ) {
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-background="#A0C66B"]' ).length, 1, 'found one vertical slide with data-background="#A0C66B"' );
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-background="#ff0000"]' ).length, 1, 'found one vertical slide with data-background="#ff0000"' );
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section[data-background="#C6916B"]' ).length, 1, 'found one slide with data-background="#C6916B"' );
+					});
 
-				QUnit.test( 'data-transition attributes', function( assert ) {
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-transition="zoom"]' ).length, 1, 'found one vertical slide with data-transition="zoom"' );
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-transition="fade"]' ).length, 1, 'found one vertical slide with data-transition="fade"' );
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides section [data-transition="zoom"]' ).length, 1, 'found one slide with data-transition="zoom"' );
-				});
+					QUnit.test( 'data-transition attributes', function( assert ) {
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-transition="zoom"]' ).length, 1, 'found one vertical slide with data-transition="zoom"' );
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-transition="fade"]' ).length, 1, 'found one vertical slide with data-transition="fade"' );
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides section [data-transition="zoom"]' ).length, 1, 'found one slide with data-transition="zoom"' );
+					});
 
-				QUnit.test( 'data-background attributes with default separator', function( assert ) {
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-background="#A7C66B"]' ).length, 1, 'found one vertical slide with data-background="#A0C66B"' );
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-background="#f70000"]' ).length, 1, 'found one vertical slide with data-background="#ff0000"' );
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section[data-background="#C7916B"]' ).length, 1, 'found one slide with data-background="#C6916B"' );
-				});
+					QUnit.test( 'data-background attributes with default separator', function( assert ) {
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-background="#A7C66B"]' ).length, 1, 'found one vertical slide with data-background="#A0C66B"' );
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-background="#f70000"]' ).length, 1, 'found one vertical slide with data-background="#ff0000"' );
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section[data-background="#C7916B"]' ).length, 1, 'found one slide with data-background="#C6916B"' );
+					});
 
-				QUnit.test( 'data-transition attributes with default separator', function( assert ) {
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-transition="concave"]' ).length, 1, 'found one vertical slide with data-transition="zoom"' );
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-transition="page"]' ).length, 1, 'found one vertical slide with data-transition="fade"' );
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides section [data-transition="concave"]' ).length, 1, 'found one slide with data-transition="zoom"' );
-				});
+					QUnit.test( 'data-transition attributes with default separator', function( assert ) {
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-transition="concave"]' ).length, 1, 'found one vertical slide with data-transition="zoom"' );
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section>section[data-transition="page"]' ).length, 1, 'found one vertical slide with data-transition="fade"' );
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides section [data-transition="concave"]' ).length, 1, 'found one slide with data-transition="zoom"' );
+					});
 
-				QUnit.test( 'data-transition attributes with inline content', function( assert ) {
-					assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section[data-background="#ff0000"]' ).length, 3, 'found three horizontal slides with data-background="#ff0000"' );
-				});
+					QUnit.test( 'data-transition attributes with inline content', function( assert ) {
+						assert.strictEqual( deck3.getRevealElement().querySelectorAll( '.reveal .slides>section[data-background="#ff0000"]' ).length, 3, 'found three horizontal slides with data-background="#ff0000"' );
+					});
 
-			} );
+					resolve();
+				} );
+			} ));
 
 			let deck4 = new Reveal( document.querySelector( '.deck4' ), {
 				markdown: {
@@ -397,112 +409,121 @@
 				},
 				plugins: [ Markdown ]
 			})
-			deck4.addEventListener( 'ready', function() {
+			allTestsReady.push( new Promise( (resolve, reject) => {
+				deck4.addEventListener( 'ready', function() {
 
-				QUnit.module( 'Options' );
+					QUnit.module( 'Options' );
 
-				QUnit.test( 'Options are set', function( assert ) {
-					assert.strictEqual( deck4.getPlugin( 'markdown' ).marked.defaults.smartypants, true );
-				});
+					QUnit.test( 'Options are set', function( assert ) {
+						assert.strictEqual( deck4.getPlugin( 'markdown' ).marked.defaults.smartypants, true );
+					});
 
-				QUnit.test( 'Smart quotes are activated', function( assert ) {
-					var text = deck4.getRevealElement().querySelector( '.reveal .slides>section>p' ).textContent;
+					QUnit.test( 'Smart quotes are activated', function( assert ) {
+						var text = deck4.getRevealElement().querySelector( '.reveal .slides>section>p' ).textContent;
 
-					assert.strictEqual( /['"]/.test( text ), false );
-					assert.strictEqual( /[“”‘’]/.test( text ), true );
-				});
+						assert.strictEqual( /['"]/.test( text ), false );
+						assert.strictEqual( /[“”‘’]/.test( text ), true );
+					});
 
-			} );
+					resolve();
+				} );
+			} ));
 
 			let deck5 = new Reveal( document.querySelector( '.deck5' ), { plugins: [ Markdown ] })
-			deck5.addEventListener( 'ready', function() {
+			allTestsReady.push( new Promise( (resolve, reject) => {
+				deck5.addEventListener( 'ready', function() {
 
-				QUnit.module( 'Element Attributes' );
+					QUnit.module( 'Element Attributes' );
 
-				QUnit.test( 'Vertical separator', function( assert ) {
-					assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides>section>section' ).length, 4, 'found four slides' );
-				});
+					QUnit.test( 'Vertical separator', function( assert ) {
+						assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides>section>section' ).length, 4, 'found four slides' );
+					});
 
-				QUnit.test( 'Attributes on element header in vertical slides', function( assert ) {
-					assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section>section h2.fragment.fade-out' ).length, 1, 'found one vertical slide with class fragment.fade-out on header' );
-					assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section>section h2.fragment.shrink' ).length, 1, 'found one vertical slide with class fragment.shrink on header' );
-				});
+					QUnit.test( 'Attributes on element header in vertical slides', function( assert ) {
+						assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section>section h2.fragment.fade-out' ).length, 1, 'found one vertical slide with class fragment.fade-out on header' );
+						assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section>section h2.fragment.shrink' ).length, 1, 'found one vertical slide with class fragment.shrink on header' );
+					});
 
-				QUnit.test( 'Attributes on element paragraphs in vertical slides', function( assert ) {
-					assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section>section p.fragment.grow' ).length, 2, 'found a vertical slide with two paragraphs with class fragment.grow' );
-				});
+					QUnit.test( 'Attributes on element paragraphs in vertical slides', function( assert ) {
+						assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section>section p.fragment.grow' ).length, 2, 'found a vertical slide with two paragraphs with class fragment.grow' );
+					});
 
-				QUnit.test( 'Attributes on element list items in vertical slides', function( assert ) {
-					assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section>section li.fragment.grow' ).length, 3, 'found a vertical slide with three list items with class fragment.grow' );
-				});
+					QUnit.test( 'Attributes on element list items in vertical slides', function( assert ) {
+						assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section>section li.fragment.grow' ).length, 3, 'found a vertical slide with three list items with class fragment.grow' );
+					});
 
-				QUnit.test( 'Attributes on element paragraphs in horizontal slides', function( assert ) {
-					assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section p.fragment.highlight-red' ).length, 4, 'found a horizontal slide with four paragraphs with class fragment.grow' );
-				});
+					QUnit.test( 'Attributes on element paragraphs in horizontal slides', function( assert ) {
+						assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section p.fragment.highlight-red' ).length, 4, 'found a horizontal slide with four paragraphs with class fragment.grow' );
+					});
 
-				QUnit.test( 'Attributes on element list items in horizontal slides', function( assert ) {
-					assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section li.fragment.highlight-green' ).length, 5, 'found a horizontal slide with five list items with class fragment.roll-in' );
-				});
+					QUnit.test( 'Attributes on element list items in horizontal slides', function( assert ) {
+						assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section li.fragment.highlight-green' ).length, 5, 'found a horizontal slide with five list items with class fragment.roll-in' );
+					});
 
-				QUnit.test( 'Attributes on element image in horizontal slides', function( assert ) {
-					assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section img.reveal.stretch' ).length, 1, 'found a horizontal slide with stretched image, class img.reveal.stretch' );
-				});
+					QUnit.test( 'Attributes on element image in horizontal slides', function( assert ) {
+						assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section img.reveal.stretch' ).length, 1, 'found a horizontal slide with stretched image, class img.reveal.stretch' );
+					});
 
-				QUnit.test( 'Attributes on elements in vertical slides with default element attribute separator', function( assert ) {
-					assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section h2.fragment.highlight-red' ).length, 2, 'found two h2 titles with fragment highlight-red in vertical slides with default element attribute separator' );
-				});
+					QUnit.test( 'Attributes on elements in vertical slides with default element attribute separator', function( assert ) {
+						assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section h2.fragment.highlight-red' ).length, 2, 'found two h2 titles with fragment highlight-red in vertical slides with default element attribute separator' );
+					});
 
-				QUnit.test( 'Attributes on elements in single slides with default element attribute separator', function( assert ) {
-					assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section p.fragment.highlight-blue' ).length, 3, 'found three elements with fragment highlight-blue in single slide with default element attribute separator' );
-				});
+					QUnit.test( 'Attributes on elements in single slides with default element attribute separator', function( assert ) {
+						assert.strictEqual( deck5.getRevealElement().querySelectorAll( '.reveal .slides section p.fragment.highlight-blue' ).length, 3, 'found three elements with fragment highlight-blue in single slide with default element attribute separator' );
+					});
 
-			} );
+					resolve();
+				} );
+			} ));
 
 			let deck6 = new Reveal( document.querySelector( '.deck6' ), {
 				plugins: [ Markdown, Highlight ]
 			})
-			deck6.addEventListener( 'ready', function() {
+			allTestsReady.push( new Promise( (resolve, reject) => {
+				deck6.addEventListener( 'ready', function() {
 
-				QUnit.module( 'Code Blocks' );
+					QUnit.module( 'Code Blocks' );
 
-				QUnit.test( 'Defaults to no line numbers', function( assert ) {
-					assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.defaults .hljs:not([data-line-numbers])' ).length, 1 );
-				});
+					QUnit.test( 'Defaults to no line numbers', function( assert ) {
+						assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.defaults .hljs:not([data-line-numbers])' ).length, 1 );
+					});
 
-				QUnit.test( 'Can set language', function( assert ) {
-					assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-language .hljs.javascript:not([data-line-numbers])' ).length, 1 );
-				});
+					QUnit.test( 'Can set language', function( assert ) {
+						assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-language .hljs.javascript:not([data-line-numbers])' ).length, 1 );
+					});
 
-				QUnit.test( '```[] enables line numbers', function( assert ) {
-					assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-line-numbers .hljs[data-line-numbers=""]' ).length, 1 );
-				});
+					QUnit.test( '```[] enables line numbers', function( assert ) {
+						assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-line-numbers .hljs[data-line-numbers=""]' ).length, 1 );
+					});
 
-				QUnit.test( '```[1,2,3] enables line highlights', function( assert ) {
-					assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-line-highlights .hljs[data-line-numbers="1,2,3"]' ).length, 1 );
-				});
+					QUnit.test( '```[1,2,3] enables line highlights', function( assert ) {
+						assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-line-highlights .hljs[data-line-numbers="1,2,3"]' ).length, 1 );
+					});
 
-				QUnit.test( '```[234: ] line offset only', function( assert ) {
-					assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-offset .hljs[data-ln-start-from="123"]' ).length, 1 );
-				});
+					QUnit.test( '```[234: ] line offset only', function( assert ) {
+						assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-offset .hljs[data-ln-start-from="123"]' ).length, 1 );
+					});
 
-				QUnit.test( '```javascript [1,2,3] enables line highlights and sets language', function( assert ) {
-					assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-line-highlights-and-lanugage .hljs.javascript[data-line-numbers="1,2,3"]' ).length, 1 );
-				});
+					QUnit.test( '```javascript [1,2,3] enables line highlights and sets language', function( assert ) {
+						assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-line-highlights-and-lanugage .hljs.javascript[data-line-numbers="1,2,3"]' ).length, 1 );
+					});
 
-				QUnit.test( '```javascript [123: 3,4,5] add line offset and enables line highlights and sets language', function( assert ) {
-					assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-line-highlights-offset-and-lanugage .hljs.javascript[data-line-numbers="3,4,5"]' ).length, 1 );
-					assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-line-highlights-offset-and-lanugage .hljs.javascript[data-ln-start-from="456"]' ).length, 1 );
-				});
+					QUnit.test( '```javascript [123: 3,4,5] add line offset and enables line highlights and sets language', function( assert ) {
+						assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-line-highlights-offset-and-lanugage .hljs.javascript[data-line-numbers="3,4,5"]' ).length, 1 );
+						assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-line-highlights-offset-and-lanugage .hljs.javascript[data-ln-start-from="456"]' ).length, 1 );
+					});
 
-				QUnit.test( '```javascript [756:] add line offset and sets no line highlights and sets language', function( assert ) {
-					assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-line-offset-and-lanugage .hljs.javascript[data-ln-start-from="756"]' ).length, 1 );
-				});
-				
-				QUnit.test( '```block should allow custom fragment', function( assert ) {
-					assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-code-in-fragment pre.fragment' ).length, 1 );
-				});
+					QUnit.test( '```javascript [756:] add line offset and sets no line highlights and sets language', function( assert ) {
+						assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-line-offset-and-lanugage .hljs.javascript[data-ln-start-from="756"]' ).length, 1 );
+					});
+					
+					QUnit.test( '```block should allow custom fragment', function( assert ) {
+						assert.strictEqual( deck6.getRevealElement().querySelectorAll( '.with-code-in-fragment pre.fragment' ).length, 1 );
+					});
 
-			} );
+					resolve();
+				} );
+			} ));
 
 			deck1.initialize();
 			deck2.initialize();
@@ -510,6 +531,10 @@
 			deck4.initialize();
 			deck5.initialize();
 			deck6.initialize();
+
+			Promise.all(allTestsReady).then(() => {
+				QUnit.start();
+			})
 		</script>
 
 	</body>
