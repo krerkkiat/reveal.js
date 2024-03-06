@@ -1,0 +1,1 @@
+cat ref-intermediate.json | jq '[ .. | .c? | .[0]?[0]? | select(type == "string") | select( . != null) | select(length > 0) | select(. != "refs") ]' > ref.json

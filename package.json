@@ -10,7 +10,8 @@
   "scripts": {
     "test": "gulp test",
     "start": "gulp serve",
-    "build": "gulp build"
+    "build": "gulp build",
+    "bib": "gulp bib"
   },
   "author": {
     "name": "Hakim El Hattab",
@@ -48,6 +49,7 @@
     "gulp-connect": "^5.7.0",
     "gulp-eslint": "^6.0.0",
     "gulp-header": "^2.0.9",
+    "gulp-run-command": "^0.0.10",
     "gulp-tap": "^2.0.0",
     "gulp-zip": "^5.1.0",
     "highlight.js": "^11.9.0",

@@ -16,6 +16,14 @@
 
   <!-- See https://github.com/hakimel/reveal.js/issues/806 -->
   <style type="text/css">
+    p {
+      text-align: left;
+    }
+
+    .reveal ul {
+      display: block;
+    }
+
     /* 1. Style header/footer <div> so they are positioned as desired. */
     .ou-header-left {
       position: absolute;
@@ -42,6 +50,11 @@
       left: 0%;
       font-size: 0.60em;
       z-index: 1;
+    }
+
+    .ou-reference {
+      width: 600px;
+      height: 500px;
     }
 
     @media (width <=800px) {
@@ -72,8 +85,14 @@
     <div class="slides">
       <section data-markdown="content.md" data-separator="^\r?\n---\r?\n$" data-separator-vertical="^\r?\n----\r?\n$">
       </section>
+
       <section>
         <h2>👋</h2>
+      </section>
+
+      <section id="references" data-ou-bg-type="light">
+        <h2>References</h2>
+        <iframe data-src="ref.html" class="ou-reference" data-preload></iframe>
       </section>
     </div>
   </div>

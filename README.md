@@ -17,10 +17,22 @@ also
 
 - Write your content using Markdown or HTML/CSS.
 - Have code with syntax highlighting for free.
+- 
 
 ### Viewing the Slides
 
+Install the dependencies.
+
 ```console
+npm install
+```
+
+You will also need `jq` and `pandoc` if you want to use the BiBTeX citation.
+
+Start the development server.
+
+```console
+npm run bib
 npm run start
 ```
 
@@ -36,6 +48,31 @@ In Markdown, add
 
 For HTML, just add that `data-ou-bg-type="light"` to the `<section>` tag.
 
+**References with BibTex**
+
+Put your BibTex entries in `ref.bib` file. To cite the entry,
+
+```markdown
+[@name](#/references)
+```
+
+The `(#/references)` has to be there since the renderer is hooked into a link token of [marked.js](https://marked.js.org/).
+
+If you want to manually refresh the ref entry, you can run
+
+```console
+npm run bib
+```
+
+The file `ref.html` and `ref.json` are used, so please check them into the VSC. The `ref.html` is used
+to diplay under the reference section (via an `iframe` tag). The `ref.json` is used to determine the correct value
+of in-line citation.
+
+To use a different style, get the CSL style sheet from [https://github.com/citation-style-language/styles](https://github.com/citation-style-language/styles), then, for now, you will have to modify the command
+in `gulpfile.js`.
+
+Since the conversion is done via `pandoc`, you can use [any format that pandoc supports](https://pandoc.org/MANUAL.html#specifying-bibliographic-data)
+
 **Font**
 
 If you want to have same font as the tempalte, follow the instructions at https://www.ohio.edu/ucm/ohio-brand/typography.
@@ -47,6 +84,12 @@ The source file is at `css/theme/source/ou.scss`. You can then re-build the them
 ```console
 npm run build -- css-themes
 ```
+
+### Known Limitations
+
+- The numbering of the citation is not as it appear on the slide.
+
+---
 
 ## About reveal.js
 
