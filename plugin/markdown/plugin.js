@@ -477,8 +477,8 @@ const Plugin = () => {
 			
 			let citationMappings = {};
 			try {
-				// ?print-pdf willbe part of window.location.href
-				const response = await fetch(window.location.href.split('?')[0] + "ref.json");
+				const urlParts = [location.protocol, location.host, location.pathname];
+				const response = await fetch(urlParts.join("") + "ref.json");
 				const data = await response.json();
 				for (var i = 0; i < data.length; i++) {
 					let name = data[i].substring(4)
