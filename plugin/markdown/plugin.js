@@ -476,22 +476,27 @@ const Plugin = () => {
 			});
 			
 			let citationMappings = {};
-			const response = await fetch("/ref.json");
-			const data = await response.json();
-			for (var i = 0; i < data.length; i++) {
-				let name = data[i].substring(4)
-				citationMappings[name] = i + 1;
+			try {
+				const response = await fetch(location.href + "ref.json");
+				const data = await response.json();
+				for (var i = 0; i < data.length; i++) {
+					let name = data[i].substring(4)
+					citationMappings[name] = i + 1;
+				}
+			} catch (error) {
+				console.error("Failed to load ref.json. Citations will be empty.")
 			}
 
 			const linkRenderer = {
 				link(href, title, text) {
 					let cleanText;
 					if (text.length != 0 && text[0] === '@') {
-						try {
-							cleanText = '[' + citationMappings[text.substring(1)] + ']'
-						} catch {
-							// Just use the text if we cannnot find the citation order for it.
-							cleanText = text + "whee";
+						const refId = text.substring(1)
+						const refOrder = citationMappings[refId]
+						if (refOrder !== undefined) {
+							cleanText = '[' + refOrder + ']'
+						} else {
+							cleanText = text;
 						}
 					} else {
 						return false;
