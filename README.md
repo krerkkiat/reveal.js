@@ -9,7 +9,7 @@
 
 ## The OU EECS Theme
 
-An attempt to replicate the [OU's branded template](https://www.ohio.edu/business/resources/faculty-staff/branded-templates) ([an EECS one](https://docs.google.com/presentation/d/1Fq-n81xTSQ3begtrmfPXXjzjtwUfF-CI/edit?usp=sharing&ouid=102167933025944444522&rtpof=true&sd=true)) in reveal.js. So far the logo on the top left and the college or department name on
+An attempt to replicate the [OU's branded template](https://www.ohio.edu/business/resources/faculty-staff/branded-templates) ([an EECS one](https://drive.google.com/file/d/1f9hrztYmwDp_hVvFPrQUG4EQtjVUy0eH/view)) in reveal.js. So far the logo on the top left and the college or department name on
 the bottom left are implemented.
 
 Why reveal.js? So far it seems to be the most mature and still being maintained. With reveal.js you can
